@@ -745,6 +745,5 @@ if program != 'stop':
 	init_setup()
 	program = input_admin(program)
 else:
-    Pharmacist_confirm = raw_input ("Terminating... Enter to continue... ")
-	
+    Pharmacist_confirm = raw_input ("Terminating... Enter to continue... ")	
 print ('\n')
