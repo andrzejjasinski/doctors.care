@@ -11,7 +11,7 @@ from random import randint
 import datetime #import time for milisecond time stamp
 import sys #import linux sys module
 
-sql_DB_name = "dcare"
+sql_DB_name = "dcare_test"
 TABLES = {} #mysql
 os_version = []
 home_folder = os.getenv('HOME')    
@@ -168,6 +168,17 @@ def test_module(program):
 		cnx = mysql.connector.connect(user=(mysql_ip_user_name), password=(mysql_password), host=(mysql_ip), port=(mysql_port))
 		cursor = cnx.cursor()
 		DB_NAME = (sql_DB_name)
+		
+		TABLES['admin_user'] = (
+		    "CREATE TABLE `admin_user` ("
+		    "  `id` varchar(20) NOT NULL,"
+		    "  `email` varchar(20) NOT NULL,"
+		    "  `password` varchar(20) NOT NULL,"
+		    "  `address` varchar(36) NOT NULL,"
+		    "  PRIMARY KEY (`id`)"
+		    ") ENGINE=InnoDB")  		
+		
+		
 		TABLES['GP_list'] = (
                     "CREATE TABLE `GP_list` ("
                     "  `GP_ID` int(2) NOT NULL AUTO_INCREMENT,"
@@ -182,51 +193,38 @@ def test_module(program):
                     "  PRIMARY KEY (`GP_ID`)"
                     ") ENGINE=InnoDB")  
 		
-		TABLES['Pharmacist_list'] = (
-                    "CREATE TABLE `Pharmacist_list` ("
-                    "  `Pharmacist_ID` int(2) NOT NULL AUTO_INCREMENT,"
-                    "  `Pharmacist_name` varchar(20) NOT NULL,"
-                    "  `Pharmacist_DOB` varchar(20) NOT NULL,"
-                    "  `Pharmacist_Address` varchar(36) NOT NULL,"
-                    "  `Pharmacist_user_name` varchar(20) NOT NULL,"
-                    "  `Pharmacist_Password` varchar(20) NOT NULL,"
-                    "  `Pharmacist_email` varchar(30) NOT NULL,"
-                    "  `Pharmacist_phone` varchar(36) NOT NULL,"
-                    "  `Pharmacist_Specialisation` varchar(16) NOT NULL,"
-                    "  PRIMARY KEY (`Pharmacist_ID`)"
+		TABLES['otherms'] = (
+                    "CREATE TABLE `otherms` ("
+                    "  `OMS_ID` varchar(20) NOT NULL,"
+                    "  `OMS_NAME` varchar(20) NOT NULL,"
+                    "  `OMS_EMAIL` varchar(20) NOT NULL,"
+                    "  `OMS_ADDRESS` varchar(36) NOT NULL,"
+                    "  `OMS_PASSWORD` varchar(20) NOT NULL,"
+                    "  `OMS_USERNAME` varchar(20) NOT NULL,"
+                    "  PRIMARY KEY (`OMS_ID`)"
                     ") ENGINE=InnoDB")    
 		
-		TABLES['OMS_list'] = (
-                    "CREATE TABLE `OMS_list` ("
-                    "  `OMS_ID` int(2) NOT NULL AUTO_INCREMENT,"
-                    "  `OMS_name` varchar(20) NOT NULL,"
-                    "  `OMS_DOB` varchar(20) NOT NULL,"
-                    "  `OMS_Address` varchar(36) NOT NULL,"
-                    "  `OMS_user_name` varchar(20) NOT NULL,"
-                    "  `OMS_Password` varchar(20) NOT NULL,"
-                    "  `OMS_email` varchar(30) NOT NULL,"
-                    "  `OMS_phone` varchar(36) NOT NULL,"
-                    "  `OMS_Specialisation` varchar(16) NOT NULL,"
-                    "  PRIMARY KEY (`OMS_ID`)"
+		TABLES['patient'] = (
+                    "CREATE TABLE `patient` ("
+                    "  `id` varchar(20) NOT NULL,"
+                    "  `email` varchar(20) NOT NULL,"
+                    "  `password` varchar(20) NOT NULL,"
+                    "  `address` varchar(36) NOT NULL,"
+                    "  `medication` varchar(20) NOT NULL,"
+                    "  PRIMARY KEY (`id`)"
                     ") ENGINE=InnoDB")  
 		
-		TABLES['Patients_list'] = (
-                    "CREATE TABLE `Patients_list` ("
-                    "  `patient_ID` int(2) NOT NULL AUTO_INCREMENT,"
-                    "  `patient_name` Varchar(20) NOT NULL,"
-                    "  `patient_DOB` Varchar(20) NOT NULL,"
-                    "  `patient_address` Varchar(40) NOT NULL,"
-                    "  `patient_phone` Varchar(20) NOT NULL,"
-                    "  `patient_user_name` Varchar(20) NOT NULL,"
-                    "  `patient_password` varchar(20) NOT NULL,"
-                    "  `patient_emergency_id` varchar(20) NOT NULL,"
-                    "  `info_1` varchar(20) NOT NULL,"
-                    "  `info_2` varchar(20) NOT NULL,"
-                    "  PRIMARY KEY (`patient_id`)"
+		TABLES['pharmacist'] = (
+                    "CREATE TABLE `pharmacist` ("
+                    "  `id` Varchar(20) NOT NULL,"
+                    "  `username` Varchar(20) NOT NULL,"
+                    "  `password` Varchar(20) NOT NULL,"
+                    "  `address` Varchar(40) NOT NULL,"
+                    "  PRIMARY KEY (`id`)"
                     ") ENGINE=InnoDB")  
 		
 		cursor = cnx.cursor()
-		cursor.execute ("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'Doctors_Care_database_Test'") 
+		cursor.execute ("SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '"+sql_DB_name+"'") 
 		rows = cursor.fetchall()
 		database_empty = (len(rows))
 		if database_empty != 0:
