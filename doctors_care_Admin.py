@@ -11,7 +11,7 @@ from random import randint
 import datetime #import time for milisecond time stamp
 import sys #import linux sys module
 
-sql_DB_name = "userdb"
+sql_DB_name = "dcare"
 TABLES = {} #mysql
 os_version = []
 home_folder = os.getenv('HOME')    
