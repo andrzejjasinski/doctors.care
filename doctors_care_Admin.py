@@ -11,6 +11,7 @@ from random import randint
 import datetime #import time for milisecond time stamp
 import sys #import linux sys module
 
+sql_DB_name = "userdb"
 TABLES = {} #mysql
 os_version = []
 home_folder = os.getenv('HOME')    
@@ -166,7 +167,7 @@ def test_module(program):
 	    def create_database():
 		cnx = mysql.connector.connect(user=(mysql_ip_user_name), password=(mysql_password), host=(mysql_ip), port=(mysql_port))
 		cursor = cnx.cursor()
-		DB_NAME = 'Doctors_Care_database_Test'
+		DB_NAME = (sql_DB_name)
 		TABLES['GP_list'] = (
                     "CREATE TABLE `GP_list` ("
                     "  `GP_ID` int(2) NOT NULL AUTO_INCREMENT,"
