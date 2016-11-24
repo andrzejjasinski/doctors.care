@@ -11,7 +11,7 @@ from random import randint
 import datetime #import time for milisecond time stamp
 import sys #import linux sys module
 
-sql_DB_name = "dcare_test"
+sql_DB_name = "drcare_test"
 TABLES = {} #mysql
 os_version = []
 home_folder = os.getenv('HOME')    
@@ -179,18 +179,14 @@ def test_module(program):
 		    ") ENGINE=InnoDB")  		
 		
 		
-		TABLES['GP_list'] = (
-                    "CREATE TABLE `GP_list` ("
-                    "  `GP_ID` int(2) NOT NULL AUTO_INCREMENT,"
-                    "  `GP_name` varchar(20) NOT NULL,"
-                    "  `GP_DOB` varchar(20) NOT NULL,"
-                    "  `GP_Address` varchar(36) NOT NULL,"
-                    "  `GP_user_name` varchar(20) NOT NULL,"
-                    "  `GP_Password` varchar(20) NOT NULL,"
-                    "  `GP_email` varchar(30) NOT NULL,"
-                    "  `GP_phone` varchar(36) NOT NULL,"
-                    "  `GP_Specialisation` varchar(16) NOT NULL,"
-                    "  PRIMARY KEY (`GP_ID`)"
+		TABLES['gplog'] = (
+                    "CREATE TABLE `gplog` ("
+                    "  `id` varchar(20) NOT NULL,"
+                    "  `email` varchar(20) NOT NULL,"
+                    "  `name` varchar(20) NOT NULL,"
+                    "  `password` varchar(36) NOT NULL,"
+                    "  `address` varchar(20) NOT NULL,"                    
+                    "  PRIMARY KEY (`id`)"
                     ") ENGINE=InnoDB")  
 		
 		TABLES['otherms'] = (
